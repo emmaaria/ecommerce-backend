@@ -18,6 +18,11 @@ Route::get('/migrate', function () {
     Artisan::call('migrate', $output);
     dd(Artisan::output());
 });
+Route::get('/link', function () {
+    $output = [];
+    Artisan::call('storage:link', $output);
+    dd(Artisan::output());
+});
 Route::get('/pull', function () {
     $output = exec('git pull 2>&1', $output, $return_var);
     dd($output);
