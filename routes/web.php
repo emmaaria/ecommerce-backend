@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +13,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/migrate', function () {
+    $output = [];
+    Artisan::call('migrate', $output);
+    dd(Artisan::output());
+});
+Route::get('/pull', function () {
+    $output = exec('git pull 2>&1', $output, $return_var);
+    dd($output);
+});
 Route::get('/', function () {
     return view('welcome');
 });
